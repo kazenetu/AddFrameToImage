@@ -12,5 +12,5 @@
 dotnetコマンドで実行する。  
 ※イメージ格納パスを必ず設定すること  
 ```sh
-dotnet run --project AddFrameToImage/AddFrameToImage.csproj [イメージを格納したディレクト(フォルダ)リパス]
+dotnet run --project AddFrameToImage/AddFrameToImage.csproj [イメージを格納したディレクトリ(フォルダ)パス]
 ```
