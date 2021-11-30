@@ -21,8 +21,12 @@
     dotnet run --project AddFrameToImage/AddFrameToImage.csproj [イメージを格納したディレクトリ(フォルダ)パス]
     ```  
     例)sample-images/afterを対象とする場合  
-    ```sh
-    dotnet run --project AddFrameToImage/AddFrameToImage.csproj ルートパス/sample-images/after
+    ```bat
+    #copy image files
+    cp sample-images/before/* sample-images/after
+
+    #run AddFrameToImage
+    dotnet run --project AddFrameToImage/AddFrameToImage.csproj ./sample-images/after
     ```
 
 
