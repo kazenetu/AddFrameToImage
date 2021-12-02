@@ -6,10 +6,12 @@
 
 ## 実行環境
 * Windows
-  * .NET Core 3.1 以上
+  * .NET Core 3.1 以上  
+  (バージョンごとにcsprojが異なる)
 
 * Windows以外
-  * .NET Core 3.1 または .NET 5
+  * .NET Core 3.1 または .NET 5  
+    (バージョンごとにcsprojが異なる)
   * libgdiplus必須
 
 
@@ -18,14 +20,21 @@
     dotnet runで実行する。  
     ※イメージ格納パスを必ず設定すること  
     ```sh
+    #.NET Core 3.1
     dotnet run --project AddFrameToImage/AddFrameToImage.csproj [イメージを格納したディレクトリ(フォルダ)パス]
+
+    #.NET 5
+    dotnet run --project AddFrameToImage/AddFrameToImage_NET5.csproj [イメージを格納したディレクトリ(フォルダ)パス]
+
+    #.NET 6
+    dotnet run --project AddFrameToImage/AddFrameToImage_NET6.csproj [イメージを格納したディレクトリ(フォルダ)パス]
     ```  
-    例)sample-images/afterを対象とする場合  
+    例)sample-images/afterを対象とする場合(.NET Core 3.1)  
     ```bat
     #copy image files
     cp sample-images/before/* sample-images/after
 
-    #run AddFrameToImage
+    #run AddFrameToImage(.NET Core 3.1)
     dotnet run --project AddFrameToImage/AddFrameToImage.csproj ./sample-images/after
     ```
 
@@ -33,7 +42,8 @@
 * Dockerコンテナでの実行  
     Dockerコンテナ上で開発環境を構築する。  
    * 前提  
-     Docker EngineやDocker Desktopがインストール済みであること。
+     * Docker EngineやDocker Desktopがインストール済みであること。
+     * .NET Core 3.1インストール済みイメージを使用。
 
    * 実行手順  
         1. docker_devに移動  
@@ -64,6 +74,7 @@
 
             1. dotnet runで実行する。
                 ```sh
+                 #.NET Core 3.1
                  dotnet run --project AddFrameToImage/AddFrameToImage.csproj /source/sample-images/after
                 ```
 
