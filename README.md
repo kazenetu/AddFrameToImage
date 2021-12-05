@@ -10,34 +10,58 @@
   (バージョンごとにcsprojが異なる)
 
 * Windows以外
-  * .NET Core 3.1 または .NET 5  
-    (バージョンごとにcsprojが異なる)
-  * libgdiplus必須
+  * System.Drawing.Common版(AddFrameToImage/AddFrameToImage.csproj)
+    * .NET Core 3.1 または .NET 5  
+        (バージョンごとにcsprojが異なる)
+    * libgdiplus必須
 
+  * SkiaSharp版(AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp.csproj)
+    * .NET Core 3.1 以上
+    * libgdiplus必須
 
 ## 実行方法
 * ローカル実行  
     dotnet runで実行する。  
     ※イメージ格納パスを必ず設定すること  
-    ```sh
-    #.NET Core 3.1
-    dotnet run --project AddFrameToImage/AddFrameToImage.csproj [イメージを格納したディレクトリ(フォルダ)パス]
+    * System.Drawing.Common版
+        ```sh
+        #.NET Core 3.1
+        dotnet run --project AddFrameToImage/AddFrameToImage.csproj [イメージを格納したディレクトリ(フォルダ)パス]
 
-    #.NET 5
-    dotnet run --project AddFrameToImage/AddFrameToImage_NET5.csproj [イメージを格納したディレクトリ(フォルダ)パス]
+        #.NET 5
+        dotnet run --project AddFrameToImage/AddFrameToImage_NET5.csproj [イメージを格納したディレクトリ(フォルダ)パス]
 
-    #.NET 6
-    dotnet run --project AddFrameToImage/AddFrameToImage_NET6.csproj [イメージを格納したディレクトリ(フォルダ)パス]
-    ```  
-    例)sample-images/afterを対象とする場合(.NET Core 3.1)  
-    ```bat
-    #copy image files
-    cp sample-images/before/* sample-images/after
+        #.NET 6
+        dotnet run --project AddFrameToImage/AddFrameToImage_NET6.csproj [イメージを格納したディレクトリ(フォルダ)パス]
+        ```  
+        例)sample-images/afterを対象とする場合(.NET Core 3.1)  
+        ```sh
+        #copy image files
+        cp sample-images/before/* sample-images/after
 
-    #run AddFrameToImage(.NET Core 3.1)
-    dotnet run --project AddFrameToImage/AddFrameToImage.csproj ./sample-images/after
-    ```
+        #run AddFrameToImage(.NET Core 3.1)
+        dotnet run --project AddFrameToImage/AddFrameToImage.csproj ./sample-images/after
+        ```  
 
+    * SkiaSharp版
+        ```sh
+        #.NET Core 3.1
+        dotnet run --project AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp.csproj [イメージを格納したディレクトリ(フォルダ)パス]
+
+        #.NET 5
+        dotnet run --project AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp_NET5.csproj [イメージを格納したディレクトリ(フォルダ)パス]
+
+        #.NET 6
+        dotnet run --project AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp_NET6.csproj [イメージを格納したディレクトリ(フォルダ)パス]
+        ```  
+        例)sample-images/afterを対象とする場合(.NET Core 3.1)  
+        ```sh
+        #copy image files
+        cp sample-images/before/* sample-images/after
+
+        #run AddFrameToImage_SkiaSharp
+        dotnet run --project AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp.csproj ./sample-images/after
+        ```
 
 * Dockerコンテナでの実行  
     Dockerコンテナ上で開発環境を構築する。  
@@ -73,10 +97,17 @@
                 ```
 
             1. dotnet runで実行する。
-                ```sh
-                 #.NET Core 3.1
-                 dotnet run --project AddFrameToImage/AddFrameToImage.csproj /source/sample-images/after
-                ```
+                * System.Drawing.Common版
+                    ```sh
+                    #.NET Core 3.1
+                    dotnet run --project AddFrameToImage/AddFrameToImage.csproj /source/sample-images/after
+                    ```
+
+                * SkiaSharp版
+                    ```sh
+                    #.NET Core 3.1
+                    dotnet run --project AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp.csproj /source/sample-images/after
+                    ```
 
             1. コンテナから離脱する。
                 ```sh
