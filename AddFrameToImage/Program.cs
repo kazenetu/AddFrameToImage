@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace AddFrameToImage
 {
@@ -20,10 +21,18 @@ namespace AddFrameToImage
 
             Console.Write("running...");
             
+            var reg = new Regex(@"[jpg|png]$");
             var directoryInfo = new DirectoryInfo(args[0]);
             foreach(var fileInfo in directoryInfo.GetFiles()){
-                // イメージに枠をつける
-                addFrame(blackPen, fileInfo.FullName);
+                // 拡張子が存在しない場合は次のファイルへ
+                if(!Path.HasExtension(fileInfo.FullName)) continue;
+
+                var ext = Path.GetExtension(fileInfo.FullName);
+                if(reg.IsMatch(ext)){
+                    // イメージに枠をつける
+                    addFrame(blackPen, fileInfo.FullName);
+                    Console.WriteLine($"Added a frame [{fileInfo.FullName}]");
+                }
             }
 
             Console.WriteLine("finish!");
