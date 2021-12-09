@@ -19,7 +19,7 @@ namespace AddFrameToImage
 
             var blackPen = new Pen(Color.Black, 1);
 
-            Console.Write("running...");
+            Console.WriteLine("running...");
             
             var reg = new Regex(@"[jpg|png]$");
             var directoryInfo = new DirectoryInfo(args[0]);
@@ -31,7 +31,7 @@ namespace AddFrameToImage
                 if(reg.IsMatch(ext)){
                     // イメージに枠をつける
                     addFrame(blackPen, fileInfo.FullName);
-                    Console.WriteLine($"Added a frame [{fileInfo.FullName}]");
+                    Console.WriteLine($"  drew rectangle [{fileInfo.FullName}]");
                 }
             }
 
