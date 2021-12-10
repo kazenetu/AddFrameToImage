@@ -1,6 +1,7 @@
 using System;
 using SkiaSharp;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace AddFrameToImage
 {
@@ -16,12 +17,20 @@ namespace AddFrameToImage
                 return;
             }
 
-            Console.Write("running...");
+            Console.WriteLine("running...");
             
+            var reg = new Regex(@"[jpg|png]$");
             var directoryInfo = new DirectoryInfo(args[0]);
             foreach(var fileInfo in directoryInfo.GetFiles()){
-                // イメージに枠をつける
-                addFrame(fileInfo.FullName);
+                // 拡張子が存在しない場合は次のファイルへ
+                if(!Path.HasExtension(fileInfo.FullName)) continue;
+
+                var ext = Path.GetExtension(fileInfo.FullName);
+                if(reg.IsMatch(ext)){
+                    // イメージに枠をつける
+                    addFrame(fileInfo.FullName);
+                    Console.WriteLine($"  drew rectangle [{fileInfo.FullName}]");
+                }
             }
 
             Console.WriteLine("finish!");
