@@ -21,7 +21,7 @@ namespace AddFrameToImage
             
             var reg = new Regex(@"[jpg|png]$");
             var directoryInfo = new DirectoryInfo(args[0]);
-            foreach(var fileInfo in directoryInfo.GetFiles()){
+            foreach(var fileInfo in directoryInfo.GetFiles("*", SearchOption.AllDirectories)){
                 // 拡張子が存在しない場合は次のファイルへ
                 if(!Path.HasExtension(fileInfo.FullName)) continue;
 
