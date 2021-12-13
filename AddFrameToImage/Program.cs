@@ -12,7 +12,8 @@ namespace AddFrameToImage
         /// </summary>
         static void Main(string[] args)
         {
-            if(args.Length < 1){
+            if (args.Length < 1)
+            {
                 Console.WriteLine("addFrameImage ImagesDirectoryPath");
                 return;
             }
@@ -20,15 +21,17 @@ namespace AddFrameToImage
             var blackPen = new Pen(Color.Black, 1);
 
             Console.WriteLine("running...");
-            
+
             var reg = new Regex(@"[jpg|png]$");
             var directoryInfo = new DirectoryInfo(args[0]);
-            foreach(var fileInfo in directoryInfo.GetFiles("*", SearchOption.AllDirectories)){
+            foreach (var fileInfo in directoryInfo.GetFiles("*", SearchOption.AllDirectories))
+            {
                 // 拡張子が存在しない場合は次のファイルへ
-                if(!Path.HasExtension(fileInfo.FullName)) continue;
+                if (!Path.HasExtension(fileInfo.FullName)) continue;
 
                 var ext = Path.GetExtension(fileInfo.FullName);
-                if(reg.IsMatch(ext)){
+                if (reg.IsMatch(ext))
+                {
                     // イメージに枠をつける
                     addFrame(blackPen, fileInfo.FullName);
                     Console.WriteLine($"  drew rectangle [{fileInfo.FullName}]");
@@ -46,10 +49,10 @@ namespace AddFrameToImage
         static private void addFrame(Pen pen, string filePath)
         {
             Image saveImage = null;
-            using(var image = Image.FromFile(filePath))
-            using(var graphics = Graphics.FromImage(image))
+            using (var image = Image.FromFile(filePath))
+            using (var graphics = Graphics.FromImage(image))
             {
-                graphics.DrawRectangle(pen, 0, 0, image.Width-1, image.Height-1);
+                graphics.DrawRectangle(pen, 0, 0, image.Width - 1, image.Height - 1);
 
                 saveImage = new Bitmap(image);
             }
