@@ -67,9 +67,9 @@
     Dockerコンテナ上で開発環境を構築する。  
    * 前提  
      * Docker EngineやDocker Desktopがインストール済みであること。
-     * .NET Core 3.1インストール済みイメージを使用。
 
    * 実行手順  
+     * System.Drawing.Common版
         1. docker_devに移動  
             ```sh
             cd docker_dev
@@ -97,16 +97,59 @@
                 ```
 
             1. dotnet runで実行する。
-                * System.Drawing.Common版
-                    ```sh
-                    #.NET Core 3.1
-                    dotnet run --project AddFrameToImage/AddFrameToImage.csproj /source/sample-images/after
-                    ```
+                ```sh
+                #.NET Core 3.1
+                dotnet run --project AddFrameToImage/AddFrameToImage.csproj /source/sample-images/after
+                ```
 
+            1. コンテナから離脱する。
+                ```sh
+                 exit
+                ```
+
+        1. コンテナ停止・削除  
+            ```sh
+            docker-compose down
+            ```
+
+     * SkiaSharp版
+        1. docker_dev_SkiaSharpに移動  
+            ```sh
+            cd docker_dev_SkiaSharp
+            ```
+
+        1. (**初回のみ**)ビルド  
+            ```sh
+            docker-compose build
+            ```
+
+        1. コンテナ起動  
+            ```sh
+            docker-compose up -d
+            ```
+
+        1. コンテナに入る  
+            ```sh
+            docker exec -it docker_dev_skiasharp_dotnet_skiasharp_1 /bin/bash
+            ```
+
+        1. コンテナ内で実行 
+            1. /source/sample-images/beforeを/source/sample-images/afterにコピーする。
+                ```sh
+                 cp /source/sample-images/before/* /source/sample-images/after
+                ```
+
+            1. dotnet runで実行する。
                 * SkiaSharp版
                     ```sh
                     #.NET Core 3.1
                     dotnet run --project AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp.csproj /source/sample-images/after
+
+                    #.NET 5.0
+                    dotnet run --project AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp_NET5.csproj /source/sample-images/after
+
+                    #.NET 6.0
+                    dotnet run --project AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp_NET6.csproj /source/sample-images/after
                     ```
 
             1. コンテナから離脱する。
