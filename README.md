@@ -17,7 +17,6 @@
 
   * SkiaSharp版(AddFrameToImage_SkiaSharp/AddFrameToImage_SkiaSharp.csproj)
     * .NET Core 3.1 以上
-    * libgdiplus必須
 
 ## 実行方法
 * ローカル実行  
